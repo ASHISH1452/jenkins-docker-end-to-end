@@ -1,13 +1,13 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+# Use an ARM-compatible base image
+FROM openjdk:11-jre-slim
 
-# Simply the artifact path
+# Define the artifact path (ensure the path is correct)
 ARG artifact=target/spring-boot-web.jar
 
 WORKDIR /opt/app
 
+# Copy the application JAR to the container
 COPY ${artifact} app.jar
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Set the entry point to run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "app.jar"]
